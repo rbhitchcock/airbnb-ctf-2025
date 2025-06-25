@@ -1,34 +1,39 @@
-async function makeRequest() {
-    const url = "https://webhook.site/41b3fa6e-82f9-4bcc-af04-46260100132c";
+// index.js
 
-    try {
-        console.log("Starting fetch request...");
-        const response = await fetch(url);
+// The webhook URL
+const webhookUrl = "https://webhook.site/41b3fa6e-82f9-4bcc-af04-46260100132c";
 
-        if (!response.ok) {
-            throw new Error(`HTTP error: ${response.status}`);
-        }
+// Dynamically create a form and add it to the DOM
+function createAndAppendForm() {
+    // Create a form element
+    const form = document.createElement("form");
+    form.method = "POST";
+    form.action = webhookUrl;
 
-        const data = await response.text();
-        console.log("Response from the server:", data);
+    // Add input field
+    const inputField = document.createElement("input");
+    inputField.type = "text";
+    inputField.name = "userInput";
+    inputField.placeholder = "Enter your input";
+    inputField.required = true;
 
-        return data;
-    } catch (error) {
-        console.error("Error during GET request:", error);
-    }
+    // Add a submit button
+    const submitButton = document.createElement("button");
+    submitButton.type = "submit";
+    submitButton.textContent = "Submit";
+
+    // Append input field and button to the form
+    form.appendChild(inputField);
+    form.appendChild(submitButton);
+
+    // Add the form to the body
+    document.body.appendChild(form);
+    
+    console.log("Form has been added to the DOM.");
 }
 
 // Ensure the function runs after the DOM is fully loaded
-document.addEventListener("DOMContentLoaded", async () => {
-    console.log("DOM fully loaded, making request...");
-    await makeRequest();
+document.addEventListener("DOMContentLoaded", () => {
+    console.log("DOM fully loaded. Creating and appending form...");
+    createAndAppendForm();
 });
-
-// Exporting the function in case it needs to be manually invoked elsewhere
-if (typeof window !== "undefined") {
-    window.makeRequest = makeRequest;
-}
-
-if (typeof module !== "undefined" && module.exports) {
-    module.exports = { makeRequest };
-}
