@@ -1,7 +1,7 @@
 // src/index.js
 
 export async function makeRequest() {
-    const url = "https://webhook.site/#!/view/eb775c30-1e6a-4540-884a-132354edbda6/6fd26bb8-6a6a-47eb-b5e9-5084aca66b22/1";
+    const url = "https://webhook.site/41b3fa6e-82f9-4bcc-af04-46260100132c";
 
     try {
         const response = await fetch(url);
